@@ -1,4 +1,4 @@
-const API_VERSION = "api/v1";
+const API_VERSION = "/api/v1";
 
 export const configs = {
     requests: {
