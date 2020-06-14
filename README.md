@@ -8,6 +8,7 @@
  <h5>* Serviço para criptografar senhas.</h5>
  <h5>* Design pattern no modelo MVVM.</h5>
  <h5>* Serviço para log de erros.</h5>
+ <h5>* Serviço para autenticação com jwt.</h5>
  <h5>* Estrutura bem definida. </h5>
 
  
