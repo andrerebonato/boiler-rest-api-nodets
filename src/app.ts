@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import routes from './Routes/routes';
+import { configs } from './Configs/configs';
+import morgan from 'morgan';
+
 import { RequestRateLimitService } from './Services/SecurityMiddlewares/RequestRateLimitService';
 
 class App {
@@ -17,6 +20,7 @@ class App {
         this.express.use(express.json());
         this.express.use(cors());
         this.express.use(helmet());
+        this.express.use(morgan(configs.morganMiddleware.type));
         this.express.use(RequestRateLimitService.limiter());
         this.express.use(RequestRateLimitService.slower());
     }
