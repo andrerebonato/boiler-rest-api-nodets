@@ -15,6 +15,9 @@ export const configs = {
     authJwt: {
         secretKey: "KEY_VAI_AQUI"
     },
+    morganMiddleware: {
+        type: "common"
+    },
     passwordCrypt: {
         /* salt is the number that provides the level of security and the time to hash the crypt [0 to 10]. */
         saltLevel: 10
