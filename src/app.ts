@@ -2,11 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import routes from './Routes/routes';
+import { PasswordCryptService } from './Services/Crypt/PasswordCryptService';
 
 class App {
     public express: express.Application;
 
-    public constructor() {
+    public constructor () {
         this.express = express();
         this.middlewares();
         this.routes();

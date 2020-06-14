@@ -2,7 +2,7 @@
 
 export abstract class BaseModel {
     public id: number;
-    public active: Boolean;
+    public active: boolean;
     public createdAt: Date;
     public lastUpdate: Date;
     public removedAt: Date;

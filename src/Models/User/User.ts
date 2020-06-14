@@ -1,8 +1,8 @@
 import { BaseModel } from '../BaseModel/BaseModel';
 
 export class User extends BaseModel {
-    public firstName: String;
-    public lastName: String;
-    public email: String;
-    public password: String;
+    public firstName: string;
+    public lastName: string;
+    public email: string;
+    public password: string;
 }
