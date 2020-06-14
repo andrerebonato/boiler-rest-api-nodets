@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import routes from './Routes/routes';
-import { PasswordCryptService } from './Services/Crypt/PasswordCryptService';
+import { RequestRateLimitService } from './Services/SecurityMiddlewares/RequestRateLimitService';
 
 class App {
     public express: express.Application;
@@ -17,6 +17,7 @@ class App {
         this.express.use(express.json());
         this.express.use(cors());
         this.express.use(helmet());
+        this.express.use(RequestRateLimitService.limiter());
     }
 
     private routes (): void{

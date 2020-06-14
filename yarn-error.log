@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/bcript
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/express-rate-limit
 
 PATH: 
   C:\Program Files\Microsoft MPI\Bin\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\TXE Components\iCLS\;C:\Program Files\Intel\TXE Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\TXE Components\DAL\;C:\Program Files (x86)\Intel\TXE Components\DAL\;C:\Program Files\Intel\TXE Components\IPT\;C:\Program Files (x86)\Intel\TXE Components\IPT\;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_191\bin;C:\Program Files\PuTTY\;C:\wamp64\bin\php\php5.6.40;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Yarn\bin\;C:\src;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Users\andre\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\andre\Anaconda3;C:\Users\andre\Anaconda3\Library\mingw-w64\bin;C:\Users\andre\Anaconda3\Library\usr\bin;C:\Users\andre\Anaconda3\Library\bin;C:\Users\andre\Anaconda3\Scripts;C:\Ruby25-x64\bin;C:\Users\andre\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Users\andre\AppData\Roaming\npm;C:\Users\andre\AppData\Roaming\Composer\vendor\bin;C:\Users\andre\AppData\Local\GitHubDesktop\bin;C:\Users\andre\AppData\Local\Yarn\bin;C:\src\flutter\bin;C:\Users\andre\.dotnet\tools;C:\Users\andre\AppData\Local\Programs\Azure Data Studio\bin;C:\Program Files\heroku\bin;C:\Users\andre\AppData\Roaming\nvm;C:\Program Files\nodejs
@@ -14,17 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fbcript: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65200:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:129590:22)
-      at Request.emit (events.js:315:20)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:130562:10)
-      at Request.emit (events.js:315:20)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:130484:12)
-      at Object.onceWrapper (events.js:421:28)
-      at IncomingMessage.emit (events.js:327:22)
-      at endReadableNT (_stream_readable.js:1201:12)
-      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+  Error: ENOTEMPTY: directory not empty, rmdir 'C:\Users\andre\Desktop\Projetos\boiler-rest-api-nodets\node_modules\.staging\lodash-77b92862'
 
 npm manifest: 
   {
@@ -37,6 +27,7 @@ npm manifest:
       "build": ""
     },
     "devDependencies": {
+      "@types/bcrypt": "^3.0.0",
       "@types/cors": "^2.8.6",
       "@types/express": "^4.17.6",
       "@typescript-eslint/eslint-plugin": "^3.2.0",
@@ -55,7 +46,9 @@ npm manifest:
     "dependencies": {
       "bcrypt": "^5.0.0",
       "cors": "^2.8.5",
-      "express": "^4.17.1"
+      "express": "^4.17.1",
+      "express-rate-limit": "^5.1.3",
+      "express-slow-down": "^1.3.1"
     }
   }
 
@@ -99,6 +92,11 @@ Lockfile:
     integrity sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==
     dependencies:
       defer-to-connect "^1.0.1"
+  
+  "@types/bcrypt@^3.0.0":
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/@types/bcrypt/-/bcrypt-3.0.0.tgz#851489a9065a067cb7f3c9cbe4ce9bed8bba0876"
+    integrity sha512-nohgNyv+1ViVcubKBh0+XiNJ3dO8nYu///9aJ4cgSqv70gBL+94SNy/iC2NLzKPT2Zt/QavrOkBVbZRLZmw6NQ==
   
   "@types/body-parser@*":
     version "1.19.0"
@@ -555,6 +553,11 @@ Lockfile:
     dependencies:
       mimic-response "^1.0.0"
   
+  clone@^1.0.2:
+    version "1.0.4"
+    resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
+    integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
+  
   code-point-at@^1.0.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -712,6 +715,13 @@ Lockfile:
     version "0.1.3"
     resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
     integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
+  
+  defaults@^1.0.3:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/defaults/-/defaults-1.0.3.tgz#c656051e9817d9ff08ed881477f3fe4019f3ef7d"
+    integrity sha1-xlYFHpgX2f8I7YgUd/P+QBnz730=
+    dependencies:
+      clone "^1.0.2"
   
   defer-to-connect@^1.0.1:
     version "1.1.3"
@@ -1046,6 +1056,18 @@ Lockfile:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/expect-ct/-/expect-ct-0.2.0.tgz#3a54741b6ed34cc7a93305c605f63cd268a54a62"
     integrity sha512-6SK3MG/Bbhm8MsgyJAylg+ucIOU71/FzyFalcfu5nY19dH8y/z0tBJU0wrNBXD4B27EoQtqPF/9wqH0iYAd04g==
+  
+  express-rate-limit@^5.1.3:
+    version "5.1.3"
+    resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-5.1.3.tgz#656bacce3f093034976346958a0f0199902c9174"
+    integrity sha512-TINcxve5510pXj4n9/1AMupkj3iWxl3JuZaWhCdYDlZeoCPqweGZrxbrlqTCFb1CT5wli7s8e2SH/Qz2c9GorA==
+  
+  express-slow-down@^1.3.1:
+    version "1.3.1"
+    resolved "https://registry.yarnpkg.com/express-slow-down/-/express-slow-down-1.3.1.tgz#0458bb8670ea1cbedaa00bae4293024ee4e9445e"
+    integrity sha512-mkxVJt3z2e0/LIVp144xpaPw8Ku2f6XS9ftjgwMsUtp+4a84hk6NI6/KTEPkq1kjCsJuXeG6SA/izCWxaErBdg==
+    dependencies:
+      defaults "^1.0.3"
   
   express@^4.17.1:
     version "4.17.1"
