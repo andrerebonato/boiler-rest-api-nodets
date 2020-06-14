@@ -18,6 +18,7 @@ class App {
         this.express.use(cors());
         this.express.use(helmet());
         this.express.use(RequestRateLimitService.limiter());
+        this.express.use(RequestRateLimitService.slower());
     }
 
     private routes (): void{

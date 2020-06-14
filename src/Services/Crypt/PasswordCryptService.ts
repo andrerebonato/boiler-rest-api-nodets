@@ -1,12 +1,10 @@
 import bcrypt from 'bcrypt';
+import { configs } from '../../Configs/configs';
 
 export class PasswordCryptService {
-    /* salt is the number that provides the level of security and the time to hash the crypt [0 to 10]. */
-    public static salt: number = 10;
-
     public static async hash(password: string): Promise<string> {
         try {
-            const hashPassword = bcrypt.hashSync(password, this.salt);
+            const hashPassword = bcrypt.hashSync(password, configs.passwordCrypt.saltLevel);
             return hashPassword;
         } catch(err) {
             console.log("Error at PasswordCryptService_hash. Error: "+ err);
