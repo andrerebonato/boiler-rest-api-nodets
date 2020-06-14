@@ -1,3 +1,5 @@
+const API_VERSION = "api/v1";
+
 export const configs = {
     requests: {
         limiter: {
@@ -13,5 +15,10 @@ export const configs = {
     passwordCrypt: {
         /* salt is the number that provides the level of security and the time to hash the crypt [0 to 10]. */
         saltLevel: 10
+    },
+    routes: {
+        user: {
+            getAll: `${API_VERSION}/user/get-all`
+        }
     }
 }
