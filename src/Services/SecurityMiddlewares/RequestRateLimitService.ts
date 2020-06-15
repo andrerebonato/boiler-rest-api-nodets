@@ -3,7 +3,7 @@ import slowDown from "express-slow-down";
 import { configs } from '../../Configs/configs';
 
 export class RequestRateLimitService { 
-    public static limiter(){
+    public static limiter(): any{
         return rateLimit({
             windowMs: configs.requests.limiter.rateLimitWindow,
             max: configs.requests.limiter.maxRequestsPerRateLimitWindow,
@@ -11,7 +11,7 @@ export class RequestRateLimitService {
         });
     }
 
-    public static slower(){
+    public static slower(): any{
         return slowDown({
             windowMs: configs.requests.slower.rateLimitWindow,
             delayAfter: configs.requests.slower.delayAfterPerRateLimitWindow,

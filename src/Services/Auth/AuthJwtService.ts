@@ -2,8 +2,8 @@ import jwt from 'jsonwebtoken';
 import { configs } from '../../Configs/configs';
 
 export class AuthJwtService {
-    public static generateToken(userData: any){
-        const token = jwt.sign(userData, configs.authJwt.secretKey);
+    public static generateToken(userData: Object){
+        const token: string = jwt.sign(userData, configs.authJwt.secretKey);
         if(token) {
             return token;
         } else {

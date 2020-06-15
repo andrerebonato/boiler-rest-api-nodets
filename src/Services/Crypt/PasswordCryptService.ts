@@ -4,7 +4,7 @@ import { configs } from '../../Configs/configs';
 export class PasswordCryptService {
     public static async hash(password: string): Promise<string> {
         try {
-            const hashPassword = bcrypt.hashSync(password, configs.passwordCrypt.saltLevel);
+            const hashPassword: string = bcrypt.hashSync(password, configs.passwordCrypt.saltLevel);
             return hashPassword;
         } catch(err) {
             console.log("Error at PasswordCryptService_hash. Error: "+ err);
@@ -14,7 +14,7 @@ export class PasswordCryptService {
 
     public static async compare(password: string, hashPassword: string): Promise<Boolean> {
         try {
-            const result = bcrypt.compareSync(password, hashPassword);
+            const result: boolean = bcrypt.compareSync(password, hashPassword);
             return result;
         } catch(err) {
             console.log("Error at PasswordCryptService_compare. Error: "+ err);
