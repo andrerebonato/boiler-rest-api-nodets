@@ -1,11 +1,13 @@
+import IError from "../../Interfaces/Error/IError";
+
 export default class ResultModel {
-    constructor(m: any, valid: boolean, e?: string) {
+    constructor(m: any, errors?: IError[]) {
         this.model = m;
-        this.errorMessage = e;
-        this.isValid = valid;
+        this.errors = errors;
+        this.isValid = !errors;
     }
 
     public model: any;
-    public errorMessage: string;
+    public errors: IError[];
     public isValid: boolean;
 }
