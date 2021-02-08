@@ -8,7 +8,6 @@ export default class MongoService {
     protected static classPath: string = path.basename(__filename);
 
     public static setup() {
-        //require("../../Entities/User");
         mongoose.set("useCreateIndex", true);
         const db = mongoose.connection;
 
