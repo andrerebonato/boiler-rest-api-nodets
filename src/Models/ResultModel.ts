@@ -1,4 +1,4 @@
-import IError from "../../Interfaces/Error/IError";
+import IError from "../Interfaces/Error";
 
 export default class ResultModel {
     constructor(m: any, errors?: IError[]) {
