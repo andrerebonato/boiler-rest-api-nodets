@@ -3,19 +3,26 @@ import cors from 'cors';
 import helmet from 'helmet';
 import routes from './Routes/routes';
 import { configs } from './Configs/configs';
+import mongoose from "mongoose";
+import IUser from "./Types/User";
 import morgan from 'morgan';
 import logger from "./Services/Log/LogErrorService";
 import path from "path";
-
+import MongoService from "./Services/Mongo/MongoService";
 import { RequestRateLimitService } from './Services/SecurityMiddlewares/RequestRateLimitService';
 class App {
     protected static classPath: string = path.basename(__filename);
     public express: express.Application;
 
     public constructor () {
+        this.services();
         this.express = express();
         this.middlewares();
         this.routes();
+    }
+
+    private async services() {
+        MongoService.setup();
     }
 
     private middlewares() {
