@@ -36,4 +36,3 @@
 ### ./src/ViewModels
 É aonde se encontram os modelos de visualização das entidades e modelos da aplicação.
 
-## Services
