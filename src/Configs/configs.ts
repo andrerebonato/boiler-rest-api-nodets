@@ -22,9 +22,21 @@ export const configs = {
         /* salt is the number that provides the level of security and the time to hash the crypt [0 to 10]. */
         saltLevel: 10
     },
+    mongo: {
+        options: {
+            useNewUrlParser: true,
+            useFindAndModify: false,
+            useUnifiedTopology: true,
+        },
+        uri: "mongodb://localhost:27017/bankName",
+        documents: {
+            user: "users",
+        },
+    },
     routes: {
         user: {
-            getAll: `${API_VERSION}/user/get-all`
+            getAll: `${API_VERSION}/user/get-all`,
+            getById: `${API_VERSION}/user/:id`
         }
     }
 }
