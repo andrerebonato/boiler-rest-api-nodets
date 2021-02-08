@@ -1,7 +1,7 @@
 # boiler-rest-api-nodets
 
 <h4> 
-  A boiler plate for restful api
+  A boiler plate for restful api with express and typescript
 </h4>
 
 # Organização de pastas
