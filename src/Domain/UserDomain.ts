@@ -2,16 +2,22 @@ import IUser from "../Types/User";
 
 export default class UserDomain {
 
-    protected static validateData(user: IUser): any[] {
+    public static validateData(user: IUser): any[] {
         const errors = [];
 
         if(!user.firstName) {
-            let error = { firstName: "Este campo não pode ser vazio ou nulo." };
-            errors.push(error);
+            errors.push({ firstName: "Este campo não pode ser vazio ou nulo." });
         } else if(user.firstName.length >= 30) {
-            let error = { firstName: "Este campo não pode conter mais de 30 caracteres." };
-            errors.push(error);
-        }
+            errors.push({ firstName: "Este campo não pode conter mais de 30 caracteres." });
+        } else if(!user.email) {
+            errors.push({ email: "Este campo não pode ser vazio ou nulo"});
+        } else if(!user.password) {
+            errors.push({ password: "Este campo não pode ser vazio ou nulo"});
+        } else if(!user.username) {
+            errors.push({ username: "Este campo não pode ser vazio ou nulo"});
+        } else if(!user.lastName) {
+            errors.push({ lastName: "Este campo não pode ser vazio ou nulo"});
+        } 
 
         return errors;
     }

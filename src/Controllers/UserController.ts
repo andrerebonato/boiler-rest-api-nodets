@@ -11,8 +11,10 @@ export default class UserController {
     public static async getAll(req: Request, res: Response): Promise<any> {
         logger.dispatch(UserController.classPath, logger.types.info, "Starting get All.");
         try {
-            const users = await UserActions.fetchAll();
+            const { filters, skip, take, sort, desc } = req.query;
+            const users = await UserActions.fetchAll(take, sort, desc, skip);
             return res.status(200).json(new ResultModel(users));
+
         } catch (error) {
             logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
             return res.status(500).json(new ResultModel(null));

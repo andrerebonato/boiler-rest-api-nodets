@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import routes from './Routes/routes';
 import { configs } from './Configs/configs';
 import mongoose from "mongoose";
+import passport from "passport";
 import IUser from "./Types/User";
 import morgan from 'morgan';
 import logger from "./Services/Log/LogErrorService";
@@ -15,6 +16,7 @@ class App {
     public express: express.Application;
 
     public constructor () {
+        require("./services/Passport/PassportService");
         this.services();
         this.express = express();
         this.middlewares();
@@ -28,6 +30,8 @@ class App {
     private middlewares() {
         try {
             logger.dispatch(App.classPath, logger.types.info, `Configuring middlewares...`);
+            this.express.use(passport.initialize());
+            this.express.use(passport.session());
             this.express.use(express.json());
             this.express.use(cors());
             this.express.use(helmet());
