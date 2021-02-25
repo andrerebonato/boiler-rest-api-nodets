@@ -14,6 +14,12 @@ const schema = new Schema<IUser>({
 		required: true,
 		unique: true
 	},
+	cpf: {
+		type: String,
+	},
+	birthDate: {
+		type: Date
+	},
 	email: {
 		type: String,
 		required: true
@@ -21,7 +27,6 @@ const schema = new Schema<IUser>({
 	password: {
 		type: String,
 		required: true,
-		select: false
 	},
 	roles: {
 		type: [String]
@@ -41,6 +46,9 @@ const schema = new Schema<IUser>({
 		type: Number,
 		default: 0
 	},
+	phoneNumber: {
+		type: String
+	},
 	gender: {
 		type: Number
 	},
@@ -49,7 +57,7 @@ const schema = new Schema<IUser>({
 schema.methods.createUser = async function(newUser, callback) {
 	const errors = UserDomain.validateData(newUser);
 
-	if(Object.keys(errors)) {
+	if(errors.length > 0) {
 		return callback(errors);
 	}
 
