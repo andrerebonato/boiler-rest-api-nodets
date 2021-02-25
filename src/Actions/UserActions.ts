@@ -1,20 +1,40 @@
 import IUser from "../Types/User";
 import User from "../Entities/User";
-
+import { PasswordCryptService } from "../Services/Crypt/PasswordCryptService";
+import { configs } from "../Configs/configs";
 export default class UserActions {
     public static async fetchAll(take: any, sort: any, desc: any, skip: any) : Promise<IUser[]> {
-        const users = await User
+        return await User
             .find()
             .limit(+take)
             .skip(+skip)
             .sort({ [sort]: desc === "true" ? -1 : 1 })
-            .select({ deleted: 0, __v: 0, historic: 0 })
+            .select({ deleted: 0, __v: 0, historic: 0, password: 0 })
             .exec();
-        return users;
     }
 
     public static async fetchById(id): Promise<IUser> {
-        const user = await User.findById(id);
-        return user;
+        return await User.findById(id).select({ deleted: 0, __v: 0, historic: 0, password: 0 });
     }
+
+    public static async create(u: IUser): Promise<IUser> {
+        return new User({ ...u });
+    }
+
+    public static async findByCredentials(username: string, password: string): Promise<any> {
+        const user = await User.findOne({ username: username });
+        
+        if (user) {
+            const correctPassword = await PasswordCryptService.compare(password, user.password);
+
+            if (correctPassword) {
+                user.password = null;
+                return user;
+            } 
+            return null;
+        }
+        
+        return null;
+    }
+
 }
