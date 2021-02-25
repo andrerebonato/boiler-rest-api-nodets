@@ -15,9 +15,7 @@ export default class UserDomain {
             errors.push({ password: "Este campo não pode ser vazio ou nulo"});
         } else if(!user.username) {
             errors.push({ username: "Este campo não pode ser vazio ou nulo"});
-        } else if(!user.lastName) {
-            errors.push({ lastName: "Este campo não pode ser vazio ou nulo"});
-        } 
+        }
 
         return errors;
     }
