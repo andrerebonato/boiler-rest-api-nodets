@@ -47,9 +47,6 @@ export default class UserController {
     public static async me(req: Request, res: Response): Promise<any> {
         logger.dispatch(UserController.classPath, logger.types.info, "Starting refreshToken.");
         try {
-           
-            console.log('req', req.user)
-
             const user = await UserActions.fetchById(req.user);
 
             if (!user) {
