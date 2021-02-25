@@ -1,11 +1,12 @@
 import express from 'express';
+import { createServer } from "http";
 import cors from 'cors';
 import helmet from 'helmet';
 import routes from './Routes/routes';
+import expressValidator from "express-validator";
 import { configs } from './Configs/configs';
-import mongoose from "mongoose";
-import passport from "passport";
-import IUser from "./Types/User";
+import bodyParser from "body-parser";
+import compression from "compression";
 import morgan from 'morgan';
 import logger from "./Services/Log/LogErrorService";
 import path from "path";
@@ -16,7 +17,6 @@ class App {
     public express: express.Application;
 
     public constructor () {
-        require("./services/Passport/PassportService");
         this.services();
         this.express = express();
         this.middlewares();
@@ -30,14 +30,16 @@ class App {
     private middlewares() {
         try {
             logger.dispatch(App.classPath, logger.types.info, `Configuring middlewares...`);
-            this.express.use(passport.initialize());
-            this.express.use(passport.session());
-            this.express.use(express.json());
             this.express.use(cors());
+            this.express.use(compression());
             this.express.use(helmet());
             this.express.use(morgan(configs.morganMiddleware.type));
             this.express.use(RequestRateLimitService.limiter());
             this.express.use(RequestRateLimitService.slower());
+            this.express.use(bodyParser.json());
+            this.express.use(bodyParser.urlencoded({ extended: false }));
+            this.express.use(expressValidator());
+            this.express.set("port", 3334);
             logger.dispatch(App.classPath, logger.types.info, `Middlewares setup.`);
         } catch (err) {
             logger.dispatch(App.classPath, logger.types.error, `Exception: ${String(err)}`);
