@@ -15,9 +15,6 @@ export const configs = {
     authJwt: {
         secretKey: "KEY_VAI_AQUI"
     },
-    passport: {
-        secretKey: "key_aqui"
-    },
     morganMiddleware: {
         type: "common"
     },
@@ -39,7 +36,11 @@ export const configs = {
     routes: {
         user: {
             getAll: `${API_VERSION}/user/get-all`,
-            getById: `${API_VERSION}/user/:id`
+            getById: `${API_VERSION}/user/:id`,
+            create: `${API_VERSION}/user/create`,
+            authenticate: `${API_VERSION}/user/authenticate`,
+            refreshToken: `${API_VERSION}/token/refresh`,
+            me: `${API_VERSION}/me`,
         }
     },
     admin: {
