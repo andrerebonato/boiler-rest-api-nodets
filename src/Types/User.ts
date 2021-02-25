@@ -7,7 +7,10 @@ export default interface IUser extends Entity {
     roles?: string[],
     pushTokens?: string[],
     firstName: string,
-    lastName: string,
+    lastname: string,
+    cpf: string,
+    phoneNumber: string,
+    birthDate: Date,
     gender?: Gender,
     status?: UserStatus,
     createUser: (u: IUser, callback: (err: any, product: IUser) => void) => Promise<void>;
