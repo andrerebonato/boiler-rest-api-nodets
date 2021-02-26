@@ -1,5 +1,6 @@
 import express from 'express';
-import { createServer } from "http";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from 'swagger-jsdoc';
 import cors from 'cors';
 import helmet from 'helmet';
 import routes from './Routes/routes';
@@ -10,6 +11,7 @@ import compression from "compression";
 import morgan from 'morgan';
 import logger from "./Services/Log/LogErrorService";
 import path from "path";
+//import Swagger from "./Documentation/Swagger";
 import MongoService from "./Services/Mongo/MongoService";
 import { RequestRateLimitService } from './Services/SecurityMiddlewares/RequestRateLimitService';
 class App {
@@ -19,6 +21,7 @@ class App {
     public constructor () {
         this.services();
         this.express = express();
+        //this.express.use(configs.routes.swagger.index, swaggerUi.setup(swaggerJsdoc(Swagger.options)));
         this.middlewares();
         this.routes();
     }
