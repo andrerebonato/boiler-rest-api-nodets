@@ -1,4 +1,4 @@
-const API_VERSION = "/api/v1";
+export const API_VERSION = "/api/v1";
 
 export const configs = {
     requests: {
@@ -41,6 +41,9 @@ export const configs = {
             authenticate: `${API_VERSION}/user/authenticate`,
             refreshToken: `${API_VERSION}/token/refresh`,
             me: `${API_VERSION}/me`,
+        },
+        swagger: {
+            index: `${API_VERSION}/docs`
         }
     },
     admin: {
