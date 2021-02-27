@@ -41,6 +41,7 @@ export const configs = {
             authenticate: `${API_VERSION}/user/authenticate`,
             refreshToken: `${API_VERSION}/token/refresh`,
             delete: `${API_VERSION}/user/:id/delete`,
+            update: `${API_VERSION}/user/:id/update`,
             me: `${API_VERSION}/me`,
         },
         swagger: {
