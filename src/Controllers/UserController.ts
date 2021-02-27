@@ -22,7 +22,7 @@ export default class UserController {
 
         } catch (error) {
             logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
-            return res.status(500).json(new ResultModel(null));
+            return res.status(500).json(new ResultModel(null, [{ message: String(error) }]));
         }
     }
 
@@ -40,7 +40,7 @@ export default class UserController {
             return res.status(200).json(new ResultModel(user));
         } catch (error) {
             logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
-            return res.status(500).json(new ResultModel(null));
+            return res.status(500).json(new ResultModel(null, [{ message: String(error) }]));
         }
     }
 
@@ -59,7 +59,7 @@ export default class UserController {
 
         } catch (error) {
             logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
-            return res.status(500).json(new ResultModel(null));
+            return res.status(500).json(new ResultModel(null, [{ message: String(error) }]));
         }
     }
 
@@ -76,8 +76,37 @@ export default class UserController {
             });
         } catch (error) {
             logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
-            return res.status(500).json(new ResultModel(null));
+            return res.status(500).json(new ResultModel(null, [{ message: String(error) }]));
         } 
+    }
+
+    public static async delete(req: Request, res: Response): Promise<any> {
+        logger.dispatch(UserController.classPath, logger.types.info, "Starting delete.");
+        const { id } = req.params;
+        const user = await UserActions.fetchById(req.user);
+
+        if (!id || id === "null") return res.status(400).json(new ResultModel(id, [{ message: "Id do usuário não informado. "}]));
+
+        if (!user.roles.includes("admin")) {
+			return res
+				.status(403)
+				.json(
+					new ResultModel(
+						null,
+						[{ message: "Você não possui permissão para realizar essa ação. "}]
+					)
+				);
+		}
+
+        try {
+            await UserActions.findByIdAndDelete(id, user._id);
+
+            return res.status(200).json(new ResultModel(id));
+
+        } catch (error) {
+            logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
+            return res.status(500).json(new ResultModel(null, [{ message: String(error) }]));
+        }
     }
 
     public static async authenticate(req: Request, res: Response): Promise<any> {
@@ -108,7 +137,7 @@ export default class UserController {
 
         } catch (error) {
             logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
-            return res.status(500).json(new ResultModel(null));
+            return res.status(500).json(new ResultModel(null, [{ message: String(error) }]));
         }
     }
 
@@ -147,7 +176,7 @@ export default class UserController {
 
         } catch (error) {
             logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
-            return res.status(500).json(new ResultModel(null));
+            return res.status(500).json(new ResultModel(null, [{ message: String(error) }]));
         }
     }
 }
