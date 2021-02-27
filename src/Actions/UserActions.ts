@@ -5,7 +5,7 @@ import { configs } from "../Configs/configs";
 export default class UserActions {
     public static async fetchAll(take: any, sort: any, desc: any, skip: any) : Promise<IUser[]> {
         return await User
-            .find()
+            .find({ deleted: false })
             .limit(+take)
             .skip(+skip)
             .sort({ [sort]: desc === "true" ? -1 : 1 })
@@ -14,7 +14,7 @@ export default class UserActions {
     }
 
     public static async fetchById(id): Promise<IUser> {
-        return await User.findById(id).select({ deleted: 0, __v: 0, historic: 0, password: 0 });
+        return await User.findOne({ _id: id, deleted: false }).select({ deleted: 0, __v: 0, historic: 0, password: 0 });
     }
 
     public static async create(u: IUser): Promise<IUser> {
@@ -35,6 +35,17 @@ export default class UserActions {
         }
         
         return null;
+    }
+
+    public static async findByIdAndDelete(uid: string, emitent: IUser) {
+        await User.updateOne(
+            {
+                _id: uid
+            },
+            {
+                deleted: true, deletedBy: emitent._id 
+            }
+        )
     }
 
 }
