@@ -37,7 +37,7 @@ export default class UserActions {
         return null;
     }
 
-    public static async findByIdAndDelete(uid: string, emitent: IUser) {
+    public static async findByIdAndDelete(uid: string, emitent: IUser): Promise<void> {
         await User.updateOne(
             {
                 _id: uid
@@ -46,6 +46,25 @@ export default class UserActions {
                 deleted: true, deletedBy: emitent._id 
             }
         )
+    }
+
+    public static async findByIdAndUpdate(id: string, model: IUser): Promise<void> {
+        User.findByIdAndUpdate(
+            id,
+            model,
+            { new: true },
+            (err, model) => {
+                if (err) {
+                    return false;
+                } else {
+                    return model;
+                }
+            }
+        )
+    }
+
+    public static async findByProp(prop: string, value: any): Promise<IUser> {
+        return await User.findOne({ [prop]: value, disabled: false });
     }
 
 }
