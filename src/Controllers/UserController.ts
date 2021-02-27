@@ -67,7 +67,14 @@ export default class UserController {
         logger.dispatch(UserController.classPath, logger.types.info, "Starting create.");
 
         try {
+            const usernameAlreadyInUse = await UserActions.findByProp("username", req.body.email);
+
+            if (usernameAlreadyInUse !== null) {
+                return res.status(403).json(new ResultModel(req.body.email, [{ message: "Esse email já esta sendo utilizado por outro usuário" }]));
+            }
+            
             const user = await UserActions.create(req.body);
+
             user.createUser(user, (err) => {
                 if (err) {
                     return res.status(403).json(new ResultModel(null, err));
@@ -102,6 +109,26 @@ export default class UserController {
             await UserActions.findByIdAndDelete(id, user._id);
 
             return res.status(200).json(new ResultModel(id));
+        } catch (error) {
+            logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
+            return res.status(500).json(new ResultModel(null, [{ message: String(error) }]));
+        }
+    }
+
+    public static async update(req: Request, res: Response): Promise<any> {
+        logger.dispatch(UserController.classPath, logger.types.info, "Starting update.");
+        try {
+            const { id } = req.params;
+
+            if (!id || id === "null") return res.status(400).json(new ResultModel(id, [{ message: "Id do usuário não informado. "}]));
+
+            const success = UserActions.findByIdAndUpdate(id, req.body as IUser);
+
+            if (!success) {
+                return res.status(500).json(new ResultModel(null, [{ message: "Ocorreu um erro ao tentar atualizar o usuário. "}]));
+            }
+
+            return res.status(200).json(new ResultModel(success));
 
         } catch (error) {
             logger.dispatch(UserController.classPath, logger.types.error, `Exception: ${String(error)}`);
