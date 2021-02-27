@@ -26,5 +26,6 @@ router.post(configs.routes.user.create, AuthJwtService.verifyToken, UserControll
 router.post(configs.routes.user.refreshToken, UserController.refreshToken);
 router.post(configs.routes.user.authenticate, UserController.authenticate);
 router.delete(configs.routes.user.delete, AuthJwtService.verifyToken, UserController.delete);
+router.put(configs.routes.user.update, AuthJwtService.verifyToken, UserController.update);
 
 export default router;
