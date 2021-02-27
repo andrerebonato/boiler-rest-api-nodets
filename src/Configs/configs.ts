@@ -40,6 +40,7 @@ export const configs = {
             create: `${API_VERSION}/user/create`,
             authenticate: `${API_VERSION}/user/authenticate`,
             refreshToken: `${API_VERSION}/token/refresh`,
+            delete: `${API_VERSION}/user/:id/delete`,
             me: `${API_VERSION}/me`,
         },
         swagger: {
