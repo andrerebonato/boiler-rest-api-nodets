@@ -3,6 +3,7 @@ import path from "path";
 import jwt from "jsonwebtoken";
 import moment from "moment";
 
+import AppError from '../Models/AppError';
 import IUser from "../Types/User";
 import TokenModel from "../Models/TokenModel";
 import { configs } from "../Configs/configs";
@@ -10,6 +11,7 @@ import ResultModel from "../Models/ResultModel";
 import logger from "../Services/Log/LogErrorService";
 import AuthJwtService from "../Services/Auth/AuthJwtService";
 import UserActions from "../Actions/UserActions";
+import UserDomain from '../Domain/UserDomain';
 export default class UserController {
     protected static classPath: string = path.basename(__filename);
 
@@ -70,7 +72,7 @@ export default class UserController {
             const usernameAlreadyInUse = await UserActions.findByProp("username", req.body.email);
 
             if (usernameAlreadyInUse !== null) {
-                return res.status(403).json(new ResultModel(req.body.email, [{ message: "Esse email já esta sendo utilizado por outro usuário" }]));
+                throw new AppError("Esse email já esta sendo utilizado por outro usuário", 403);
             }
             
             const user = await UserActions.create(req.body);

@@ -9,7 +9,6 @@ export default class UserActions {
             .limit(+take)
             .skip(+skip)
             .sort({ [sort]: desc === "true" ? -1 : 1 })
-            .select({ deleted: 0, __v: 0, historic: 0, password: 0 })
             .exec();
     }
 

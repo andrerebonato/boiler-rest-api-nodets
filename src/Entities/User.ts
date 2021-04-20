@@ -5,13 +5,14 @@ import IUser from "../Types/User";
 import UserDomain from "../Domain/UserDomain";
 import { PasswordCryptService } from "../Services/Crypt/PasswordCryptService";
 import { configs } from "../Configs/configs";
+import AppError from "../Models/AppError";
 
 const schema = new Schema<IUser>({
 	...Entity,
 	username: {
 		type: String,
 		index: true,
-		required: true,
+		required: [true, 'Necessário'],
 		unique: true
 	},
 	cpf: {
@@ -55,15 +56,20 @@ const schema = new Schema<IUser>({
 });
 
 schema.methods.createUser = async function(newUser, callback) {
-	const errors = UserDomain.validateData(newUser);
+	try {
+		const errors = UserDomain.validate(newUser);
 
-	if(errors.length > 0) {
-		return callback(errors);
+		if (errors) {
+			return callback(errors);
+		}
+
+		const hash = await PasswordCryptService.hash(newUser.password);
+		newUser.password = hash;
+		newUser.save(callback);
+	} catch (error) {
+		throw new AppError(error);
 	}
-
-	const hash = await PasswordCryptService.hash(newUser.password);
-	newUser.password = hash;
-	newUser.save(callback);
+	
 };
 
 schema.methods.updateUser = async function(user, callback) {

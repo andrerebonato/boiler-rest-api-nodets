@@ -1,24 +1,18 @@
 import express from 'express';
-
+import 'express-async-errors';
 import AuthJwtService from "../Services/Auth/AuthJwtService";
 import UserController from '../Controllers/UserController';
+import AppError from '../Models/AppError';
+import IError from '../Types/Error';
+import ResultModel from '../Models/ResultModel';
 import { configs } from '../Configs/configs';
 
 import "moment/locale/pt-br";
 
 const router = express.Router();
-/**
- * @swagger
- * !Needs authenticate
- * /api/v1/user/get-all
- *  get:
- *      description: get all active users
-*       responses:
- *          200:
- *              description: Success
- * 
- * 
- */
+
+router.use(express.json());
+
 router.get(configs.routes.user.getAll, AuthJwtService.verifyToken, UserController.getAll);
 router.get(configs.routes.user.getById, AuthJwtService.verifyToken, UserController.getById);
 router.get(configs.routes.user.me, AuthJwtService.verifyToken, UserController.me);

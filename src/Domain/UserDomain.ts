@@ -1,22 +1,16 @@
 import IUser from "../Types/User";
-
 export default class UserDomain {
 
-    public static validateData(user: IUser): any[] {
+    public static validate(user: IUser): any[] | void {
         const errors = [];
+        const mongooseErrors = user.validateSync();
 
-        if(!user.firstName) {
-            errors.push({ firstName: "Este campo não pode ser vazio ou nulo." });
-        } else if(user.firstName.length >= 30) {
-            errors.push({ firstName: "Este campo não pode conter mais de 30 caracteres." });
-        } else if(!user.email) {
-            errors.push({ email: "Este campo não pode ser vazio ou nulo"});
-        } else if(!user.password) {
-            errors.push({ password: "Este campo não pode ser vazio ou nulo"});
-        } else if(!user.username) {
-            errors.push({ username: "Este campo não pode ser vazio ou nulo"});
+        if (mongooseErrors) {
+            const messages = mongooseErrors.message.split(',');
+            messages.map(m => errors.push({ message: m }));
+            return errors;
         }
 
-        return errors;
+        return null;
     }
 }

@@ -8,7 +8,7 @@ import logger from "../../Services/Log/LogErrorService";
 export default class MongoService {
     protected static classPath: string = path.basename(__filename);
 
-    public static setup() {
+    public static async setup(): Promise<void> {
         mongoose.set("useCreateIndex", true);
         const db = mongoose.connection;
 
